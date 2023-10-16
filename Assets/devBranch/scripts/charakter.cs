@@ -17,6 +17,7 @@ public class charakter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(sanity);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -32,7 +33,18 @@ public class charakter : MonoBehaviour
                 // Überprüfe ob sprite flip notwendig
                 CheckSpriteFlip();
             }
+
+            else if (hit.collider.gameObject.tag== "door")
+            {
+                targetPos = new Vector2(hit.point.x, gameObject.transform.position.y);
+                hit.collider.gameObject.GetComponent<door>().useDoor();
+            }
         }
+    }
+
+    public void IncreaseSanity()
+    {
+        sanity++;
     }
 
     private void FixedUpdate()
